@@ -3,7 +3,19 @@ import './UserItem.css'
 
 const UserItem = (props) => {
     return (
-        <h1></h1>
+        <li className="user-item">
+            <div className="user-item__content">
+                <div className="user-item__image">
+                    <img src={props.image} alt={props.name} />
+                </div>
+                <div className="user-item__info">
+                    <h2>{props.name}</h2>
+                    <h3>
+                        {props.numberOfPlaces} {props.numberOfPlaces === 1 ? 'Place' : 'Places'}
+                    </h3>
+                </div>
+            </div>
+        </li>
     )
 }
 
