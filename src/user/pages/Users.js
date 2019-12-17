@@ -19,9 +19,7 @@ const Users = () => {
     ]; 
     
     return (
-        <>
-            <UsersList items={dummyUsers} /> 
-        </>
+        <UsersList items={dummyUsers} /> 
     )
 }
 
