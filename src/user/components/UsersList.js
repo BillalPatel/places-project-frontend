@@ -27,9 +27,7 @@ const UsersList = (props) => {
                 ))}
             </ul>
         )
-    }
-    
-    
+    }    
 }
 
 export default UsersList;
