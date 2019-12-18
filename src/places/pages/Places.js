@@ -14,7 +14,7 @@ const Places = () => {
       creatorId: 'user1',
       location: {
         lat: 41.008583,
-        long: 28.9779863
+        lng: 28.9779863
       }
     }
   ]
