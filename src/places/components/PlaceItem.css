@@ -1,6 +1,6 @@
-.place-item {
+  .place-item {
     margin: 1rem 0;
-}
+  }
   
   .place-item__content {
     padding: 0;
@@ -52,4 +52,9 @@
     .place-item__image {
       height: 20rem;
     } 
+  }
+
+  .map-container {
+    height: 20rem;
+    width: 100%;
   }
