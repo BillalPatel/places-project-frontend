@@ -5,7 +5,8 @@ import PlaceItem from './PlaceItem';
 import './PlaceList.css';
 
 const PlaceList = (props) => {
-  if (props.items.length === 0) {
+  const { items } = props;
+  if (items.length === 0) {
     return (
       <div className="place-list-center">
         <Card>
@@ -13,25 +14,24 @@ const PlaceList = (props) => {
           <button>Share Place</button>
         </Card>
       </div>
-    )
-  } else {
-    return (
-      <ul className="place-list">
-        {props.items.map(place => (
-          <PlaceItem 
-            key={place.id}
-            id={place.id}
-            title={place.title}
-            description={place.description}
-            address={place.address}
-            image={place.imageUrl}
-            creatorId={place.creatorId}
-            coordinates={place.location}
-          />
-        ))}
-      </ul>
-    )
+    );
   }
-}
+  return (
+    <ul className="place-list">
+      {items.map((place) => (
+        <PlaceItem
+          key={place.id}
+          id={place.id}
+          title={place.title}
+          description={place.description}
+          address={place.address}
+          image={place.imageUrl}
+          creatorId={place.creatorId}
+          coordinates={place.location}
+        />
+      ))}
+    </ul>
+  );
+};
 
 export default PlaceList;
