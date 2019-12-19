@@ -36,6 +36,7 @@ const EditPlace = () => {
     <form>
       <h2>Edit Place</h2>
       <Input />
+      <Button />
     </form>
   );
 };
