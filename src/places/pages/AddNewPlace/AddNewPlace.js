@@ -85,14 +85,14 @@ const AddNewPlace = () => {
       />
       <Input
         id="address"
-        el="textarea"
+        el="input"
         label="Address"
         validators={[VALIDATOR_REQUIRE(), VALIDATOR_MINLENGTH(10)]}
         errorMessage="Please enter a valid address"
         onInput={inputChange}
       />
       <Button type="submit" disabled={!formState.isValid}>
-                Add Place
+        Add Place
       </Button>
     </form>
   );
