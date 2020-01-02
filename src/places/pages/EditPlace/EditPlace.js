@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import Input from '../../../shared/components/FormElements/input/Input';
 import Button from '../../../shared/components/FormElements/button/Button';
+import { useForm } from '../../../shared/hooks/form';
 import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH } from '../../../shared/utils/validators';
 import '../AddNewPlace/PlaceForm.css';
 
@@ -25,6 +26,20 @@ const EditPlace = () => {
   const { placeId } = useParams();
   const place = dummyPlaces.find((el) => el.id === placeId);
 
+  const [formState, inputChange] = useForm(
+    {
+      title: {
+        value: place.title,
+        isValid: true
+      },
+      description: {
+        value: place.description,
+        isValid: true
+      }
+    },
+    true
+  );
+
   if (!place) {
     return (
       <div className="center">
@@ -33,8 +48,13 @@ const EditPlace = () => {
     );
   }
 
+  const submitEditNewPlace = (event) => {
+    event.preventDefault();
+    console.log(formState.inputs); // Replace with backend
+  };
+
   return (
-    <form className="place-form">
+    <form className="place-form" onSubmit={submitEditNewPlace}>
       <h2>Edit Place</h2>
       <Input
         id="title"
@@ -43,7 +63,9 @@ const EditPlace = () => {
         label="Title"
         validators={[VALIDATOR_REQUIRE()]}
         errorMessage="Please enter a valid title"
-        onInput={() => {}}
+        onInput={inputChange}
+        initialValue={formState.inputs.title.value}
+        initiallyValid={formState.inputs.title.isValid}
       />
       <Input
         id="description"
@@ -52,21 +74,11 @@ const EditPlace = () => {
         rows="2"
         validators={[VALIDATOR_REQUIRE(), VALIDATOR_MINLENGTH(5)]}
         errorMessage="Please enter a valid description"
-        onInput={() => {}}
-        valid="true"
-        value=""
+        onInput={inputChange}
+        initialValue={formState.inputs.description.value}
+        initiallyValid={formState.inputs.description.isValid}
       />
-      <Input
-        id="address"
-        elementType="input"
-        label="Address"
-        validators={[VALIDATOR_REQUIRE(), VALIDATOR_MINLENGTH(10)]}
-        errorMessage="Please enter a valid address"
-        onInput={() => {}}
-        valid="true"
-        value={place.description}
-      />
-      <Button type="submit" disabled>
+      <Button type="submit" disabled={!formState.isValid}>
         Edit Place
       </Button>
     </form>
