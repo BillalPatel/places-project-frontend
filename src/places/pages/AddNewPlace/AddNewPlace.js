@@ -2,61 +2,28 @@ import React, { useCallback, useReducer } from 'react';
 
 import Input from '../../../shared/components/FormElements/input/Input';
 import Button from '../../../shared/components/FormElements/button/Button';
+import { useForm } from '../../../shared/hooks/form';
 import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH } from '../../../shared/utils/validators';
-import './AddNewPlace.css';
-
-const formReducer = (state, action) => {
-  switch (action.type) {
-    case 'INPUT_CHANGE':
-      let formIsValid = true;
-      for (const inputId in state.inputs) {
-        if (inputId === action.inputId) {
-          formIsValid = formIsValid && action.isValid;
-        } else {
-          formIsValid = formIsValid && state.inputs[inputId].isValid;
-        }
-      }
-      return {
-        ...state,
-        input: {
-          ...state.inputs,
-          [action.inputId]: {
-            value: action.value,
-            isValid: action.isValid,
-          },
-          isValid: formIsValid,
-        },
-      };
-    default:
-      return state;
-  }
-};
+import './PlaceForm.css';
 
 const AddNewPlace = () => {
-  const [formState, dispatch] = useReducer(formReducer, {
-    inputs: {
+  const [formState, inputChange] = useForm(
+    {
       title: {
         value: '',
-        isValid: false,
+        isValid: false
       },
       description: {
         value: '',
-        isValid: false,
+        isValid: false
       },
+      address: {
+        value: '',
+        isValid: false
+      }
     },
-    isValid: false,
-  });
-
-  const inputChange = useCallback((id, value, isValid) => {
-    dispatch(
-      {
-        type: 'INPUT_CHANGE',
-        inputId: id,
-        value,
-        isValid,
-      },
-    );
-  }, []);
+    false
+  );
 
   const submitAddNewPlace = (event) => {
     event.preventDefault();
@@ -67,7 +34,7 @@ const AddNewPlace = () => {
     <form className="place-form" onSubmit={submitAddNewPlace}>
       <Input
         id="title"
-        el="input"
+        elementType="input"
         type="text"
         label="Title"
         validators={[VALIDATOR_REQUIRE()]}
@@ -76,16 +43,15 @@ const AddNewPlace = () => {
       />
       <Input
         id="description"
-        el="textarea"
+        elementType="textarea"
         label="Description"
-        rows="2"
-        validators={[VALIDATOR_REQUIRE(), VALIDATOR_MINLENGTH(5)]}
+        validators={[VALIDATOR_REQUIRE()]}
         errorMessage="Please enter a valid description"
         onInput={inputChange}
       />
       <Input
         id="address"
-        el="input"
+        elementType="input"
         label="Address"
         validators={[VALIDATOR_REQUIRE(), VALIDATOR_MINLENGTH(10)]}
         errorMessage="Please enter a valid address"

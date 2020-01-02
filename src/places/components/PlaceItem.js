@@ -11,7 +11,6 @@ const PlaceItem = (props) => {
   const [showMap, setShowMap] = useState(false);
 
   const openMap = () => setShowMap(true);
-
   const closeMap = () => setShowMap(false);
 
   return (
