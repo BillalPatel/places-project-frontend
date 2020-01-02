@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import Input from '../../../shared/components/FormElements/input/Input';
@@ -23,36 +23,70 @@ const dummyPlaces = [ // Will replace with API data
 ];
 
 const EditPlace = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const { placeId } = useParams();
+
   const place = dummyPlaces.find((el) => el.id === placeId);
 
-  const [formState, inputChange] = useForm(
+  const [formState, inputChange, setFormData] = useForm(
     {
       title: {
-        value: place.title,
-        isValid: true
+        value: '',
+        isValid: false
       },
       description: {
-        value: place.description,
-        isValid: true
+        value: '',
+        isValid: false
       }
     },
-    true
+    false
   );
 
-  if (!place) {
-    return (
-      <div className="center">
-        <h2>Not found </h2>
-      </div>
-    );
-  }
+  useEffect(() => {
+    if (place) {
+      setFormData({
+        title: {
+          value: place.title,
+          isValid: true
+        },
+        description: {
+          value: place.description,
+          isValid: true
+        }
+      },
+      true);
+    }
+    setIsLoading(false);
+  }, [setFormData, place]);
 
   const submitEditNewPlace = (event) => {
     event.preventDefault();
     console.log(formState.inputs); // Replace with backend
   };
 
+  if (!place) {
+    return (
+      <div className="center">
+        <h2>Place not found</h2>
+      </div>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <div className="center">
+        <h2>Loading...</h2>
+      </div>
+    );
+  }
+
+  if (!formState.inputs.title.value) {
+    return (
+      <div className="center">
+        <div>Loading...</div>
+      </div>
+    );
+  }
   return (
     <form className="place-form" onSubmit={submitEditNewPlace}>
       <h2>Edit Place</h2>
@@ -79,7 +113,7 @@ const EditPlace = () => {
         initiallyValid={formState.inputs.description.isValid}
       />
       <Button type="submit" disabled={!formState.isValid}>
-        Edit Place
+          Edit Place
       </Button>
     </form>
   );
