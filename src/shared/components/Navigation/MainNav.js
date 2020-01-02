@@ -10,13 +10,8 @@ import './MainNav.css';
 const MainNav = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
-  const openDrawer = () => {
-    setDrawerOpen(true);
-  };
-
-  const closeDrawer = () => {
-    setDrawerOpen(false);
-  };
+  const openDrawer = () => setDrawerOpen(true);
+  const closeDrawer = () => setDrawerOpen(false);
 
   return (
     <>

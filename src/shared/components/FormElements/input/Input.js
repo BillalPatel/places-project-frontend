@@ -9,12 +9,12 @@ const inputReducer = (state, action) => {
       return {
         ...state,
         value: action.val,
-        isValid: validate(action.val, action.validators),
+        isValid: validate(action.val, action.validators)
       };
     case 'TOUCH': {
       return {
         ...state,
-        isTouched: true,
+        isTouched: true
       };
     }
     default:
@@ -25,12 +25,14 @@ const inputReducer = (state, action) => {
 const Input = (props) => {
   const [inputState, dispatch] = useReducer(inputReducer,
     {
-      value: '',
-      isValid: false,
-      isTouched: false,
+      value: props.value || '',
+      isValid: props.valid || false,
+      isTouched: false
     });
 
-  const {id, onInput, type, placeholder, rows, validators, el, label, errorMessage} = props;
+  const {
+    id, onInput, type, placeholder, rows, validators, elementType, label, errorMessage
+  } = props;
   const { value, isValid } = inputState;
 
   useEffect(() => {
@@ -42,8 +44,8 @@ const Input = (props) => {
       {
         type: 'CHANGE',
         val: event.target.value,
-        validators: validators,
-      },
+        validators
+      }
     );
   };
 
@@ -51,7 +53,7 @@ const Input = (props) => {
     dispatch({ type: 'TOUCH' });
   };
 
-  const element = el === 'input'
+  const element = elementType === 'input'
     ? (
       <input
         id={id}
@@ -60,6 +62,7 @@ const Input = (props) => {
         onChange={handleFormChange}
         onBlur={touch}
         value={inputState.value}
+        // valid=""
       />
     )
     : (
@@ -69,6 +72,7 @@ const Input = (props) => {
         onChange={handleFormChange}
         onBlur={touch}
         value={value}
+        // valid="true"
       />
     );
 
