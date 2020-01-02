@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import Input from '../../../shared/components/FormElements/input/Input';
@@ -26,8 +26,22 @@ const EditPlace = () => {
   const { placeId } = useParams();
   const place = dummyPlaces.find((el) => el.id === placeId);
 
-  const [formState, inputChange] = useForm(
+  const [formState, inputChange, setFormData] = useForm(
     {
+      title: {
+        value: '',
+        isValid: false
+      },
+      description: {
+        value: '',
+        isValid: false
+      }
+    },
+    false
+  );
+
+  useEffect(() => {
+    setFormData({
       title: {
         value: place.title,
         isValid: true
@@ -37,13 +51,13 @@ const EditPlace = () => {
         isValid: true
       }
     },
-    true
-  );
+    true);
+  }, [setFormData, place]);
 
   if (!place) {
     return (
       <div className="center">
-        <h2>Not found </h2>
+        <h2>Place not found</h2>
       </div>
     );
   }
@@ -53,6 +67,13 @@ const EditPlace = () => {
     console.log(formState.inputs); // Replace with backend
   };
 
+  if (!formState.inputs.title.value) {
+    return (
+      <div className="center">
+        <div>Loading...</div>
+      </div>
+    );
+  }
   return (
     <form className="place-form" onSubmit={submitEditNewPlace}>
       <h2>Edit Place</h2>
@@ -79,7 +100,7 @@ const EditPlace = () => {
         initiallyValid={formState.inputs.description.isValid}
       />
       <Button type="submit" disabled={!formState.isValid}>
-        Edit Place
+          Edit Place
       </Button>
     </form>
   );
