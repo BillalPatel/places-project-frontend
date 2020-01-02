@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import Input from '../../../shared/components/FormElements/input/Input';
@@ -23,7 +23,9 @@ const dummyPlaces = [ // Will replace with API data
 ];
 
 const EditPlace = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const { placeId } = useParams();
+
   const place = dummyPlaces.find((el) => el.id === placeId);
 
   const [formState, inputChange, setFormData] = useForm(
@@ -41,18 +43,26 @@ const EditPlace = () => {
   );
 
   useEffect(() => {
-    setFormData({
-      title: {
-        value: place.title,
-        isValid: true
+    if (place) {
+      setFormData({
+        title: {
+          value: place.title,
+          isValid: true
+        },
+        description: {
+          value: place.description,
+          isValid: true
+        }
       },
-      description: {
-        value: place.description,
-        isValid: true
-      }
-    },
-    true);
+      true);
+    }
+    setIsLoading(false);
   }, [setFormData, place]);
+
+  const submitEditNewPlace = (event) => {
+    event.preventDefault();
+    console.log(formState.inputs); // Replace with backend
+  };
 
   if (!place) {
     return (
@@ -62,10 +72,13 @@ const EditPlace = () => {
     );
   }
 
-  const submitEditNewPlace = (event) => {
-    event.preventDefault();
-    console.log(formState.inputs); // Replace with backend
-  };
+  if (isLoading) {
+    return (
+      <div className="center">
+        <h2>Loading...</h2>
+      </div>
+    );
+  }
 
   if (!formState.inputs.title.value) {
     return (
