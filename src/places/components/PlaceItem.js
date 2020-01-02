@@ -7,8 +7,11 @@ import Map from '../../shared/components/UIElements/map/Map';
 import './PlaceItem.css';
 
 const PlaceItem = (props) => {
-  const { id, address, coordinates, image, title, description } = props;
+  const {
+    id, address, coordinates, image, title, description
+  } = props;
   const [showMap, setShowMap] = useState(false);
+  const [showConfirmModal, setConfirmShowModal] = useState(false);
 
   const openMap = () => setShowMap(true);
   const closeMap = () => setShowMap(false);
@@ -29,6 +32,18 @@ const PlaceItem = (props) => {
             zoom={16}
           />
         </div>
+      </Modal>
+      <Modal
+        header="Are you sure?"
+        footerClass="place-item__modal-actions"
+        footer={(
+          <>
+            <Button inverse>CANCEL</Button>
+            <Button danger>DELETE</Button>
+          </>
+        )}
+      >
+        <p>Are you sure you want to delete this place?</p>
       </Modal>
       <li className="place-item">
         <Card className="place-item__content">
