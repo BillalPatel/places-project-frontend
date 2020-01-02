@@ -11,7 +11,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "dev": "nodemon react-scripts start",
+    "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -38,7 +38,6 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-react-hooks": "^1.7.0",
-    "nodemon": "^2.0.2",
     "prettier": "^1.19.1"
   }
 }

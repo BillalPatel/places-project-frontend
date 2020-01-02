@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { CSSTransition } from 'react-transition-group';
 
 import Background from '../background/Background';
@@ -8,6 +9,7 @@ const Modal = (props) => {
   const {
     show, onCancel, className, style,
   } = props;
+
   return (
     <>
       {show && <Background onClick={onCancel} />}
@@ -28,6 +30,7 @@ const Overlay = (props) => {
   const {
     className, style, headerClass, header, onSubmit, contentClass, children, footerClass, footer,
   } = props;
+
   return (
     <div className={`modal ${className}`} style={style}>
       <header className={`modal__header ${headerClass}`}>

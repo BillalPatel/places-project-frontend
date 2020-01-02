@@ -6,7 +6,7 @@ const Background = (props) => {
   const { onClick } = props;
   return (
     <div className="background" onClick={onClick} />
-  )
+  );
 };
 
 export default Background;

@@ -6,6 +6,7 @@ const Avatar = (props) => {
   const {
     className, style, image, alt, width,
   } = props;
+
   return (
     <div className={`avatar ${className}`} style={style}>
       <img
