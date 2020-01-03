@@ -8,6 +8,7 @@ import Users from './user/pages/Users';
 import Places from './places/pages/Places';
 import AddNewPlace from './places/pages/AddNewPlace/AddNewPlace';
 import EditPlace from './places/pages/EditPlace/EditPlace';
+import Authentication from './user/pages/Authentication';
 
 const App = () => (
   <Router>
@@ -22,6 +23,9 @@ const App = () => (
         </Route>
         <Route path="/places/new" exact>
           <AddNewPlace />
+        </Route>
+        <Route path="/auth" exact>
+          <Authentication />
         </Route>
         <Route path="/places/:placeId" exact>
           <EditPlace />

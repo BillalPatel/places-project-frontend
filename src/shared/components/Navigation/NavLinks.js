@@ -5,16 +5,16 @@ import './NavLinks.css';
 const NavLinks = () => (
   <ul className="nav-links">
     <NavLink to="/users" exact>
-                All Users
+      All Users
     </NavLink>
     <NavLink to="/user1/places">
-                My Places
+      My Places
     </NavLink>
     <NavLink to="/places/new">
-                Add Place
+      Add Place
     </NavLink>
     <NavLink to="/auth">
-                Authenticate
+      Authenticate
     </NavLink>
   </ul>
 );
