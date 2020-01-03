@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Input from '../../shared/components/FormElements/input/Input';
 import Card from '../../shared/components/UIElements/card/Card';
@@ -8,6 +8,7 @@ import { VALIDATOR_EMAIL, VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH } from '../../s
 import './Authentication.css';
 
 const Authentication = () => {
+  const [isLoginForm, setIsLoginForm] = useState(true);
   const [formState, inputChange] = useForm(
     {
       email: {
@@ -22,6 +23,10 @@ const Authentication = () => {
     false
   );
 
+  const switchForm = () => {
+    setIsLoginForm((prevMode) => !prevMode);
+  };
+
   const submitAuthentication = (event) => {
     event.preventDefault();
     console.log(formState.inputs); // Replace with backend
@@ -30,7 +35,9 @@ const Authentication = () => {
   return (
     <Card className="authentication">
       <form className="place-form" onSubmit={submitAuthentication}>
-        <h2>Sign In</h2>
+        <h2>
+          {isLoginForm ? 'Sign In Here' : 'Register your details'}
+        </h2>
         <Input
           id="email"
           elementType="input"
@@ -50,9 +57,12 @@ const Authentication = () => {
           onInput={inputChange}
         />
         <Button type="submit" disabled={!formState.isValid}>
-          Sign in
+          {isLoginForm ? 'Sign in' : 'Signup'}
         </Button>
       </form>
+      <p onClick={switchForm}>
+        {isLoginForm ? 'Signup Instead' : 'Login'}
+      </p>
     </Card>
   );
 };
