@@ -34,10 +34,21 @@ const Authentication = () => {
 
   return (
     <Card className="authentication">
+      <h2>
+        {isLoginForm ? 'Sign In Here' : 'Register your details'}
+      </h2>
       <form className="place-form" onSubmit={submitAuthentication}>
-        <h2>
-          {isLoginForm ? 'Sign In Here' : 'Register your details'}
-        </h2>
+        {!isLoginForm && (
+          <Input
+            id="name"
+            elementType="input"
+            type="text"
+            label="Name"
+            validators={[VALIDATOR_REQUIRE()]}
+            errorMessage="Please enter a valid name"
+            onInput={inputChange}
+          />
+        )}
         <Input
           id="email"
           elementType="input"
