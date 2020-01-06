@@ -29,6 +29,7 @@ const PlaceList = (props) => {
           image={place.imageUrl}
           creatorId={place.creatorId}
           coordinates={place.location}
+          onDelete={props.onDeletePlace}
         />
       ))}
     </ul>

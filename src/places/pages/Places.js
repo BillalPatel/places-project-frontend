@@ -27,6 +27,10 @@ const Places = () => {
     fetchPlaces();
   }, [sendRequest, userId]);
 
+  const handleDeletePlace = (deletedPlaceId) => {
+    setLoadedPlaces((prevPlaces) => prevPlaces.filter((place) => place.id !== deletedPlaceId));
+  };
+
   return (
     <>
       <ErrorModal error={error} onClear={clearError} />
@@ -36,7 +40,7 @@ const Places = () => {
         </div>
       )}
       {!isLoading && loadedPlaces && (
-        <PlaceList items={loadedPlaces} />
+        <PlaceList items={loadedPlaces} onDeletePlace={handleDeletePlace} />
       )}
     </>
   );

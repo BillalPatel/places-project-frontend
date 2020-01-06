@@ -128,8 +128,8 @@ const Authentication = () => {
             elementType="input"
             type="password"
             label="Password"
-            validators={[VALIDATOR_MINLENGTH(5)]}
-            errorMessage="Please enter a valid password, at least 5 characters."
+            validators={[VALIDATOR_MINLENGTH(6)]}
+            errorMessage="Please enter a valid password, at least 6 characters."
             onInput={inputChange}
           />
           <Button type="submit" disabled={!formState.isValid}>
