@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import Input from '../../../shared/components/FormElements/input/Input';
 import Button from '../../../shared/components/FormElements/button/Button';
@@ -32,6 +33,8 @@ const AddNewPlace = () => {
     },
     false
   );
+
+  const history = useHistory();
 
   const submitAddNewPlace = async (event) => {
     event.preventDefault();

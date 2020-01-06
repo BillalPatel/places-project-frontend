@@ -1,32 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
 
 import Input from '../../../shared/components/FormElements/input/Input';
 import Button from '../../../shared/components/FormElements/button/Button';
 import { useForm } from '../../../shared/hooks/form';
+import { useHttpClient } from '../../../shared/hooks/http-hook';
 import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH } from '../../../shared/utils/validators';
+import { AuthenticationContext } from '../../../shared/context/authentication-context';
 import '../AddNewPlace/PlaceForm.css';
-
-const dummyPlaces = [ // Will replace with API data
-  {
-    id: '123',
-    title: 'Istanbul',
-    description: 'Hagia Sophia',
-    address: 'Sultan Ahmet, Ayasofya Meydanı, 34122 Fatih/İstanbul, Turkey',
-    imageUrl: 'http://i.hurimg.com/i/hdn/75/0x0/5c0d246dc03c0e15a49c546a.jpg',
-    creatorId: 'user1',
-    location: {
-      lat: 41.008583,
-      lng: 28.9779863
-    }
-  }
-];
+import LoadingSpinner from '../../../shared/components/UIElements/loadingSpinner/LoadingSpinner';
 
 const EditPlace = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const auth = useContext(AuthenticationContext);
+  const {isLoading, error, sendRequest, clearError} = useHttpClient();
+  const [loadedPlace, setLoadedPlace] = useState();
   const { placeId } = useParams();
-
-  const place = dummyPlaces.find((el) => el.id === placeId);
+  const history = useHistory();
 
   const [formState, inputChange, setFormData] = useForm(
     {
@@ -43,39 +32,35 @@ const EditPlace = () => {
   );
 
   useEffect(() => {
-    if (place) {
-      setFormData({
-        title: {
-          value: place.title,
-          isValid: true
+    const fetchPlace = async () => {
+      try {
+        const responseData = await sendRequest(`http://localhost:5000/api/places/${placeId}`);
+        setLoadedPlace(responseData.place);
+        setFormData({
+          title: {
+            value: responseData.place.title,
+            isValid: true
+          },
+          description: {
+            value: responseData.place.description,
+            isValid: true
+          }
         },
-        description: {
-          value: place.description,
-          isValid: true
-        }
-      },
-      true);
-    }
-    setIsLoading(false);
-  }, [setFormData, place]);
+        true);
+      } catch (error) {}
+    };
+    fetchPlace();
+  }, [sendRequest, placeId]);
 
   const submitEditNewPlace = (event) => {
     event.preventDefault();
     console.log(formState.inputs); // Replace with backend
   };
 
-  if (!place) {
-    return (
-      <div className="center">
-        <h2>Place not found</h2>
-      </div>
-    );
-  }
-
   if (isLoading) {
     return (
       <div className="center">
-        <h2>Loading...</h2>
+        <LoadingSpinner />
       </div>
     );
   }
