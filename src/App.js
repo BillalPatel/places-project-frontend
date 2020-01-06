@@ -15,9 +15,9 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState(false);
 
-  const login = useCallback((userId) => {
+  const login = useCallback((uid) => {
     setIsLoggedIn(true);
-    setUserId(userId);
+    setUserId(uid);
   }, []);
 
   const logout = useCallback(() => {
@@ -31,9 +31,6 @@ const App = () => {
     routes = (
       <Switch>
         <Route path="/" exact>
-          <Users />
-        </Route>
-        <Route path="/users" exact>
           <Users />
         </Route>
         <Route path="/:userId/places" exact>
@@ -57,23 +54,22 @@ const App = () => {
         <Route path="/:userId/places" exact>
           <Places />
         </Route>
-        <Route path="/places/new" exact>
-          <AddNewPlace />
-        </Route>
-        <Route path="/places/:placeId" exact>
-          <EditPlace />
-        </Route>
-        <Route path="/auth" exacty>
+        <Route path="/auth">
           <Authentication />
         </Route>
         <Redirect to="/auth" />
       </Switch>
     );
   }
+
   return (
-    <AuthenticationContext.Provider value={{
-      isLoggedIn, userId, login, logout
-    }}
+    <AuthenticationContext.Provider
+      value={{
+        isLoggedIn,
+        userId,
+        login,
+        logout
+      }}
     >
       <Router>
         <MainNav />

@@ -42,7 +42,6 @@ const AddNewPlace = () => {
     try {
       await sendRequest('http/localhost:5000/api/places',
         'POST',
-
         { 'Content-Type': 'application/json' },
         JSON.stringify({
           title: formState.inputs.title.value,
