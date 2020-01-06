@@ -1,25 +1,49 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import UsersList from '../components/UsersList';
+import LoadingSpinner from '../../shared/components/UIElements/loadingSpinner/LoadingSpinner';
+import ErrorModal from '../../shared/components/UIElements/modal/ErrorModal';
 
-const Users = () => {
-  const dummyUsers = [ // Will replace with API data
-    {
-      id: 'user1',
-      name: 'Mo Salah',
-      image: 'https://static.independent.co.uk/s3fs-public/thumbnails/image/2014/03/25/12/eiffel.jpg?w968h681',
-      numberOfPlaces: 3
-    },
-    {
-      id: 'user2',
-      name: 'Virgil van Dijk',
-      image: 'https://cdn.britannica.com/36/162636-050-932C5D49/Colosseum-Rome-Italy.jpg',
-      numberOfPlaces: 8
-    }
-  ];
+const Users = async () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState();
+  const [allUsers, setAllUsers] = useState();
+
+  await useEffect(() => {
+    const sendRequest = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch('http://localhost:5000/api/users');
+        const responseData = await response.json();
+
+        if (!response.ok) {
+          throw new Error(responseData.message);
+        }
+
+        setAllUsers(responseData.users);
+      } catch (error) {
+        setError(error.message);
+      }
+      setIsLoading(false);
+    };
+    sendRequest();
+  }, []);
+
+  const handleError = () => {
+    setError(null);
+  };
 
   return (
-    <UsersList items={dummyUsers} />
+    <>
+      <ErrorModal error={error} onClear={handleError} />
+      {isLoading && (
+        <div className="center">
+          <LoadingSpinner />
+        </div>
+      )}
+      {!isLoading && allUsers
+        && (<UsersList items={allUsers} />)}
+    </>
   );
 };
 
