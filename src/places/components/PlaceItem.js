@@ -18,7 +18,7 @@ const PlaceItem = (props) => {
   const [showMap, setShowMap] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const {
-    id, address, coordinates, image, title, description
+    id, address, coordinates, image, title, description, creatorId
   } = props;
 
   const openMap = () => setShowMap(true);
@@ -79,7 +79,7 @@ const PlaceItem = (props) => {
           </div>
           <div className="place-item__actions">
             <Button inverse onClick={openMap}>View Place On Map</Button>
-            {auth.isLoggedIn && (
+            {auth.userId === creatorId && (
               <>
                 <Button to={`/places/${id}`}>Edit Place</Button>
                 <Button danger onClick={displayDeleteWarningModal}>Delete Place</Button>
