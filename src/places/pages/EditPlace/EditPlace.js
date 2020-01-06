@@ -61,13 +61,13 @@ const EditPlace = () => {
       await sendRequest(
         `http://localhost:5000/api/places/${placeId}`,
         'PATCH',
+        {
+          'Content-Type': 'application/json'
+        },
         JSON.stringify({
           title: formState.inputs.title.value,
           description: formState.inputs.description.value
-        }),
-        {
-          'Content-Type': 'application/json'
-        }
+        })
       );
       history.push(`/${auth.userId}/places`);
     } catch (err) {}
@@ -92,7 +92,6 @@ const EditPlace = () => {
     <>
       <ErrorModal error={error} onClear={clearError} />
       {!isLoading && loadedPlace && (
-
       <form className="place-form" onSubmit={submitEditNewPlace}>
         <h2>Edit Place</h2>
         <Input
@@ -103,8 +102,8 @@ const EditPlace = () => {
           validators={[VALIDATOR_REQUIRE()]}
           errorMessage="Please enter a valid title"
           onInput={inputChange}
-          initialValue={formState.inputs.title.value}
-          initiallyValid={formState.inputs.title.isValid}
+          initialValue={loadedPlace.title}
+          initiallyValid
         />
         <Input
           id="description"
@@ -114,8 +113,8 @@ const EditPlace = () => {
           validators={[VALIDATOR_REQUIRE(), VALIDATOR_MINLENGTH(5)]}
           errorMessage="Please enter a valid description"
           onInput={inputChange}
-          initialValue={formState.inputs.description.value}
-          initiallyValid={formState.inputs.description.isValid}
+          initialValue={loadedPlace.description}
+          initiallyValid
         />
         <Button type="submit" disabled={!formState.isValid}>
           Edit Place
