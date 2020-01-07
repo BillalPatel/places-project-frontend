@@ -39,7 +39,7 @@ const App = () => {
         <Route path="/places/new" exact>
           <AddNewPlace />
         </Route>
-        <Route path="/places/:placeId" exact>
+        <Route path="/places/:placeId">
           <EditPlace />
         </Route>
         <Redirect to="/" />
@@ -48,7 +48,7 @@ const App = () => {
   } else {
     routes = (
       <Switch>
-        <Route path="/users" exact>
+        <Route path="/" exact>
           <Users />
         </Route>
         <Route path="/:userId/places" exact>
