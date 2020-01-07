@@ -68,6 +68,7 @@ const Authentication = () => {
             email: formState.inputs.email.value,
             password: formState.inputs.password.value
           }));
+
         auth.login(responseData.user.id);
       } catch (error) {}
     } else {
