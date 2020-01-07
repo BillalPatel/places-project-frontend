@@ -15,9 +15,7 @@ const MainNav = () => {
 
   return (
     <>
-      {drawerOpen
-        ? (<Background onClick={closeDrawer} />)
-        : null}
+      {drawerOpen && (<Background onClick={closeDrawer} />)}
       <SideDrawer show={drawerOpen} onClick={closeDrawer}>
         <nav className="main-navigation__drawer-nav">
           <NavLinks />

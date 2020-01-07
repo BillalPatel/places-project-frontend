@@ -61,26 +61,20 @@ const Authentication = () => {
 
     if (isLoginForm) {
       try {
-        const responseData = await fetch('http://localhost:5000/api/users/login',
+        const responseData = await sendRequest('http://localhost:5000/api/users/login',
           'POST',
-          {
-            'Content-Type': 'application/json'
-          },
+          { 'Content-Type': 'application/json' },
           JSON.stringify({
             email: formState.inputs.email.value,
             password: formState.inputs.password.value
           }));
         auth.login(responseData.user.id);
-      } catch (error) {
-
-      }
+      } catch (error) {}
     } else {
       try {
         const responseData = await sendRequest('http://localhost:5000/api/users/signup',
           'POST',
-          {
-            'Content-Type': 'application/json'
-          },
+          { 'Content-Type': 'application/json' },
           JSON.stringify(
             {
               name: formState.inputs.name.value,
@@ -101,7 +95,7 @@ const Authentication = () => {
         {isLoading && (
           <LoadingSpinner asOverlay />
         )}
-        <h2>Login Required</h2>
+        <h2>Authentication Required</h2>
         <form onSubmit={submitAuthentication}>
           {!isLoginForm && (
             <Input
@@ -137,7 +131,7 @@ const Authentication = () => {
           </Button>
         </form>
         <Button inverse onClick={switchForm}>
-          {isLoginForm ? 'Signup Instead' : 'Login'}
+          {isLoginForm ? 'Signup Instead' : 'Login Instead'}
         </Button>
       </Card>
     </>
