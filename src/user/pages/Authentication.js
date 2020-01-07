@@ -61,7 +61,7 @@ const Authentication = () => {
 
     if (isLoginForm) {
       try {
-        const responseData = await fetch('http://localhost:5000/api/users/login',
+        const responseData = await sendRequest('http://localhost:5000/api/users/login',
           'POST',
           { 'Content-Type': 'application/json' },
           JSON.stringify({
@@ -95,7 +95,7 @@ const Authentication = () => {
         {isLoading && (
           <LoadingSpinner asOverlay />
         )}
-        <h2>Login Required</h2>
+        <h2>Authentication Required</h2>
         <form onSubmit={submitAuthentication}>
           {!isLoginForm && (
             <Input
@@ -131,7 +131,7 @@ const Authentication = () => {
           </Button>
         </form>
         <Button inverse onClick={switchForm}>
-          {isLoginForm ? 'Signup Instead' : 'Login'}
+          {isLoginForm ? 'Signup Instead' : 'Login Instead'}
         </Button>
       </Card>
     </>

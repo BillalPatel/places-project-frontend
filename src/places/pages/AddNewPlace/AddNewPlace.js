@@ -40,7 +40,7 @@ const AddNewPlace = () => {
     event.preventDefault();
 
     try {
-      await sendRequest('http/localhost:5000/api/places',
+      await sendRequest('http://localhost:5000/api/places',
         'POST',
         { 'Content-Type': 'application/json' },
         JSON.stringify({
@@ -84,7 +84,7 @@ const AddNewPlace = () => {
           onInput={inputChange}
         />
         <Button type="submit" disabled={!formState.isValid}>
-        Add Place
+          Add Place
         </Button>
       </form>
     </>
