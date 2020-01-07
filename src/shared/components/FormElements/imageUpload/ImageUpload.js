@@ -4,7 +4,9 @@ import Button from '../button/Button';
 import './ImageUpload.css';
 
 const ImageUpload = (props) => {
-  const { id, center, onInput, errorText } = props;
+  const {
+    id, center, onInput, errorText
+  } = props;
 
   const [file, setFile] = useState();
   const [previewUrl, setPreviewUrl] = useState();

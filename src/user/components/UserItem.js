@@ -7,20 +7,20 @@ import './UserItem.css';
 
 const UserItem = (props) => {
   const {
-    id, image, name, numberOfPlaces,
+    id, imageUrl, name, numberOfPlaces
   } = props;
+
   return (
     <li className="user-item">
       <Card className="user-item__content">
         <Link to={`/${id}/places`}>
           <div className="user-item__image">
-            <Avatar image={image} alt={name} />
+            <Avatar imageUrl={`http://localhost:5000/${imageUrl}`} alt={name} />
           </div>
           <div className="user-item__info">
             <h2>{name}</h2>
             <h3>
               {numberOfPlaces}
-              {' '}
               {numberOfPlaces === 1 ? 'Place' : 'Places'}
             </h3>
           </div>

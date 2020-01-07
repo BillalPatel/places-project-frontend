@@ -18,7 +18,7 @@ const PlaceItem = (props) => {
   const [showMap, setShowMap] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const {
-    id, address, coordinates, image, title, description, creatorId
+    id, address, coordinates, imageUrl, title, description, creatorId
   } = props;
 
   const openMap = () => setShowMap(true);
@@ -70,7 +70,7 @@ const PlaceItem = (props) => {
         <Card className="place-item__content">
           {isLoading && (<LoadingSpinner asOverlay />)}
           <div className="place-item__image">
-            <img src={image} alt={title} />
+            <img src={imageUrl} alt={title} />
           </div>
           <div className="place-item__info">
             <h2>{title}</h2>
