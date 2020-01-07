@@ -6,7 +6,7 @@ import Button from '../../../shared/components/FormElements/button/Button';
 import LoadingSpinner from '../../../shared/components/UIElements/loadingSpinner/LoadingSpinner';
 import ErrorModal from '../../../shared/components/UIElements/modal/ErrorModal';
 import { useForm } from '../../../shared/hooks/form';
-import { useHttpClient } from '../../../shared/hooks/http-hook';
+import { useHttpClient } from '../../../shared/hooks/http';
 import { AuthenticationContext } from '../../../shared/context/authentication-context';
 import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH } from '../../../shared/utils/validators';
 import './PlaceForm.css';
