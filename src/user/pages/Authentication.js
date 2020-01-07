@@ -3,10 +3,11 @@ import React, { useState, useContext } from 'react';
 import Input from '../../shared/components/FormElements/input/Input';
 import Card from '../../shared/components/UIElements/card/Card';
 import Button from '../../shared/components/FormElements/button/Button';
+import ImageUpload from '../../shared/components/FormElements/imageUpload/ImageUpload';
 import ErrorModal from '../../shared/components/UIElements/modal/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/loadingSpinner/LoadingSpinner';
 import { useForm } from '../../shared/hooks/form';
-import { useHttpClient } from '../../shared/hooks/http-hook';
+import { useHttpClient } from '../../shared/hooks/http';
 import { AuthenticationContext } from '../../shared/context/authentication-context';
 import { VALIDATOR_EMAIL, VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH } from '../../shared/utils/validators';
 import './Authentication.css';
@@ -37,7 +38,8 @@ const Authentication = () => {
       setFormData(
         {
           ...formState.inputs,
-          name: undefined
+          name: undefined,
+          image: undefined
         },
         formState.inputs.email.isValid && formState.inputs.password.isValid
       );
@@ -47,6 +49,10 @@ const Authentication = () => {
           ...formState.inputs,
           name: {
             value: '',
+            isValid: false
+          },
+          image: {
+            value: null,
             isValid: false
           }
         },
@@ -109,6 +115,7 @@ const Authentication = () => {
               onInput={inputChange}
             />
           )}
+          {!isLoginForm && <ImageUpload id="image" onInput={inputChange} center />}
           <Input
             id="email"
             elementType="input"
