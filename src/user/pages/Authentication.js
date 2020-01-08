@@ -116,7 +116,15 @@ const Authentication = () => {
               onInput={inputChange}
             />
           )}
-          {!isLoginForm && <ImageUpload id="imageUrl" onInput={inputChange} center />}
+          {!isLoginForm
+            && (
+            <ImageUpload
+              id="imageUrl"
+              onInput={inputChange}
+              errorText="Please provide an image"
+              center
+            />
+            )}
           <Input
             id="email"
             elementType="input"

@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import Input from '../../../shared/components/FormElements/input/Input';
+import ImageUpload from '../../../shared/components/FormElements/imageUpload/ImageUpload';
 import Button from '../../../shared/components/FormElements/button/Button';
 import LoadingSpinner from '../../../shared/components/UIElements/loadingSpinner/LoadingSpinner';
 import ErrorModal from '../../../shared/components/UIElements/modal/ErrorModal';
@@ -29,6 +30,10 @@ const AddNewPlace = () => {
       address: {
         value: '',
         isValid: false
+      },
+      imageUrl: {
+        value: null,
+        isValid: false
       }
     },
     false
@@ -40,15 +45,18 @@ const AddNewPlace = () => {
     event.preventDefault();
 
     try {
-      await sendRequest('http://localhost:5000/api/places',
+      const formData = new FormData();
+      formData.append('title', formState.inputs.title.value);
+      formData.append('description', formState.inputs.description.value);
+      formData.append('address', formState.inputs.address.value);
+      formData.append('image', formState.inputs.imageUrl.value);
+      formData.append('creatorId', auth.userId);
+
+      await sendRequest(
+        'http://localhost:5000/api/places',
         'POST',
-        { 'Content-Type': 'application/json' },
-        JSON.stringify({
-          title: formState.inputs.title.value,
-          description: formState.inputs.description.value,
-          address: formState.inputs.address.value,
-          creatorId: auth.userId
-        }));
+        formData
+      );
 
       history.push('/');
     } catch (error) {}
@@ -84,6 +92,7 @@ const AddNewPlace = () => {
           errorMessage="Please enter a valid address"
           onInput={inputChange}
         />
+        <ImageUpload id="imageUrl" onInput={inputChange} errorText="Please provide an image" />
         <Button type="submit" disabled={!formState.isValid}>
           Add Place
         </Button>
