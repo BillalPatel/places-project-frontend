@@ -62,7 +62,6 @@ const Input = (props) => {
         onChange={handleFormChange}
         onBlur={touch}
         value={inputState.value}
-        // valid=""
       />
     )
     : (
@@ -72,7 +71,6 @@ const Input = (props) => {
         onChange={handleFormChange}
         onBlur={touch}
         value={value}
-        // valid="true"
       />
     );
 
