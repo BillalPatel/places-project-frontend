@@ -39,6 +39,9 @@ const Places = () => {
           <LoadingSpinner />
         </div>
       )}
+      {!isLoading && !loadedPlaces && (
+        <PlaceList items={loadedPlaces} />
+      )}
       {!isLoading && loadedPlaces && (
         <PlaceList items={loadedPlaces} onDeletePlace={handleDeletePlace} />
       )}

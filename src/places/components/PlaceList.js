@@ -7,12 +7,13 @@ import './PlaceList.css';
 
 const PlaceList = (props) => {
   const { items } = props;
-  if (items.length === 0) {
+
+  if (!items || items.length === 0) {
     return (
       <div className="place-list-center">
         <Card>
           <h2>No places found</h2>
-          <Button to="/places/new">Share Place</Button>
+          <Button to="/places/new">Add a New Place</Button>
         </Card>
       </div>
     );
@@ -29,7 +30,7 @@ const PlaceList = (props) => {
           imageUrl={place.imageUrl}
           creatorId={place.creatorId}
           coordinates={place.location}
-          onDelete={props.onDeletePlace}
+          onDeletePlace={props.deletePlaceById}
         />
       ))}
     </ul>

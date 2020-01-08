@@ -17,6 +17,8 @@ const PlaceItem = (props) => {
   const auth = useContext(AuthenticationContext);
   const [showMap, setShowMap] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  
+  
   const {
     id, address, coordinates, imageUrl, title, description, creatorId
   } = props;
@@ -29,7 +31,7 @@ const PlaceItem = (props) => {
   const confirmDelete = async () => {
     setShowConfirmModal(false);
     try {
-      await sendRequest(`http://localhost:5000/api/places${id}`, 'DELETE');
+      await sendRequest(`http://localhost:5000/api/places/${id}`, 'DELETE');
       props.onDelete(id);
     } catch (error) {}
   };
