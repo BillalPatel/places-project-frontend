@@ -74,8 +74,7 @@ const Authentication = () => {
             password: formState.inputs.password.value
           }),
           { 'Content-Type': 'application/json' });
-
-        auth.login(responseData.user.id);
+        auth.login(responseData.user, responseData.token);
       } catch (error) {}
     } else {
       try {
@@ -91,7 +90,7 @@ const Authentication = () => {
           formData
         );
 
-        auth.login(responseData.user.id);
+        auth.login(responseData.user, responseData.token);
       } catch (error) {}
     }
   };
