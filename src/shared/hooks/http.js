@@ -1,4 +1,6 @@
-import { useState, useCallback, useRef, useEffect } from 'react';
+import {
+  useState, useCallback, useRef, useEffect
+} from 'react';
 
 export const useHttpClient = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -23,7 +25,7 @@ export const useHttpClient = () => {
         const responseData = await response.json();
 
         activeHttpRequests.current = activeHttpRequests.current.filter(
-          reqCtrl => reqCtrl !== httpAbortCtrl
+          (reqCtrl) => reqCtrl !== httpAbortCtrl
         );
 
         if (!response.ok) {
@@ -45,11 +47,11 @@ export const useHttpClient = () => {
     setError(null);
   };
 
-  useEffect(() => {
-    return () => {
-      activeHttpRequests.current.forEach(abortCtrl => abortCtrl.abort());
-    };
+  useEffect(() => () => {
+    activeHttpRequests.current.forEach((abortCtrl) => abortCtrl.abort());
   }, []);
 
-  return { isLoading, error, sendRequest, clearError };
+  return {
+    isLoading, error, sendRequest, clearError
+  };
 };

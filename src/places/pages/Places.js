@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import PlaceList from '../components/PlaceList';
 import LoadingSpinner from '../../shared/components/UIElements/loadingSpinner/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/modal/ErrorModal';
-
 import { useHttpClient } from '../../shared/hooks/http';
 
 const Places = () => {
@@ -39,10 +38,7 @@ const Places = () => {
           <LoadingSpinner />
         </div>
       )}
-      {!isLoading && !loadedPlaces && (
-        <PlaceList items={loadedPlaces} />
-      )}
-      {!isLoading && loadedPlaces && (
+      {!isLoading && (
         <PlaceList items={loadedPlaces} onDeletePlace={handleDeletePlace} />
       )}
     </>
