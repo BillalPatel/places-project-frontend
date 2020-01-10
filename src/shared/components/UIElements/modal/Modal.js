@@ -6,9 +6,7 @@ import Background from '../background/Background';
 import './Modal.css';
 
 const Modal = (props) => {
-  const {
-    show, onCancel, className, style,
-  } = props;
+  const { show, onCancel } = props;
 
   return (
     <>
