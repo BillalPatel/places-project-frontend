@@ -1,15 +1,17 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { Suspense, lazy, useState, useCallback, useEffect } from 'react';
 import {
   BrowserRouter as Router, Route, Redirect, Switch
 } from 'react-router-dom';
 
 import MainNav from './shared/components/Navigation/MainNav';
-import Users from './user/pages/Users';
-import Places from './places/pages/Places';
-import AddNewPlace from './places/pages/AddNewPlace/AddNewPlace';
-import EditPlace from './places/pages/EditPlace/EditPlace';
-import Authentication from './user/pages/Authentication';
 import { AuthenticationContext } from './shared/context/authentication-context';
+import LoadingSpinner from './shared/components/UIElements/loadingSpinner/LoadingSpinner';
+
+const Users = lazy(() => import('./user/pages/Users'));
+const Places = lazy(() => import('./places/pages/Places'));
+const AddNewPlace = lazy(() => import('./places/pages/AddNewPlace/AddNewPlace'));
+const EditPlace = lazy(() => import('./places/pages/EditPlace/EditPlace'));
+const Authentication = lazy(() => import('./user/pages/Authentication'));
 
 let logoutTimer;
 
@@ -109,7 +111,13 @@ const App = () => {
       <Router>
         <MainNav />
         <main>
-          {routes}
+          <Suspense fallback={
+            <div className="center">
+              <LoadingSpinner />
+            </div>}
+          >
+            {routes}
+          </Suspense>
         </main>
       </Router>
     </AuthenticationContext.Provider>
