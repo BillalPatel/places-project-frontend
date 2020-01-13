@@ -35,11 +35,6 @@ const PlaceItem = (props) => {
         'DELETE',
         null,
         { Authorization: `Bearer ${auth.token}` });
-      //   {
-      //     'Content-Type': 'application/json',
-      //     Authorization: 'Bearer ' + auth.token
-      //   }
-      // );
       props.onDelete(id);
     } catch (error) {}
   };
