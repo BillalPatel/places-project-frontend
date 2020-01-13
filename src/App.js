@@ -93,7 +93,7 @@ const App = () => {
         <Route path="/auth">
           <Authentication />
         </Route>
-        <Redirect to="/auth" />
+        <Redirect to="/" />
       </Switch>
     );
   }
