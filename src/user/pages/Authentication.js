@@ -79,11 +79,10 @@ const Authentication = () => {
     } else {
       try {
         const formData = new FormData();
-        formData.append('email', formState.inputs.email.value);
         formData.append('name', formState.inputs.name.value);
-        formData.append('password', formState.inputs.password.value);
         formData.append('image', formState.inputs.imageUrl.value);
-        console.log('HI THERE: ', process.env.REACT_APP_BACKEND_URL);
+        formData.append('email', formState.inputs.email.value);
+        formData.append('password', formState.inputs.password.value);
 
         const responseData = await sendRequest(
           `${process.env.REACT_APP_BACKEND_URL}users/signup`,
