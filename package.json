@@ -1,6 +1,7 @@
 {
-  "name": "frontend",
-  "version": "0.1.0",
+  "name": "places-sharer-web",
+  "version": "1.0.0",
+  "description": "Frontend using ReactJS for the Places Sharer MERN app.",
   "private": true,
   "dependencies": {
     "react": "^16.11.0",
