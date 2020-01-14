@@ -6,6 +6,7 @@ import './UsersList.css';
 
 const UsersList = (props) => {
   const { items } = props;
+
   if (items.length === 0) {
     return (
       <div className="center">
@@ -15,6 +16,7 @@ const UsersList = (props) => {
       </div>
     );
   }
+
   return (
     <ul className="users-list">
       {items.map((user) => (
@@ -23,7 +25,7 @@ const UsersList = (props) => {
           id={user.id}
           name={user.name}
           imageUrl={user.imageUrl}
-          numberOfPlaces={user.places === true && user.places.length}
+          numberOfPlaces={user.places.length}
         />
       ))}
     </ul>
