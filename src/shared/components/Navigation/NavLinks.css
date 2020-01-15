@@ -24,8 +24,8 @@
 .nav-links a:hover,
 .nav-links a:active,
 .nav-links a.active {
-  background: #f8df00;
-  border-color: #292929;
+  background: #EDF9D3;
+  border-color: #779A29;
   color: #292929;
 }
 
@@ -58,8 +58,9 @@
   }
 
   .nav-links a {
-    color: white;
+    color: #779A29;
     text-decoration: none;
+    font-weight: 550;
   }
 
   .nav-links button {
