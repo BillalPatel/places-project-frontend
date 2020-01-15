@@ -18,7 +18,6 @@ const PlaceItem = (props) => {
   const [showMap, setShowMap] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
 
-
   const {
     id, address, coordinates, imageUrl, title, description, creatorId
   } = props;
