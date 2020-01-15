@@ -10,7 +10,7 @@ const PlaceList = (props) => {
 
   if (!items || items.length === 0) {
     return (
-      <div className="place-list-center">
+      <div className="place-list">
         <Card>
           <h2>No places found</h2>
           <Button to="/places/new">Add a New Place</Button>
