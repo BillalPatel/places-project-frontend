@@ -26,7 +26,7 @@ const Modal = (props) => {
 
 const Overlay = (props) => {
   const {
-    className, style, headerClass, header, onSubmit, contentClass, children, footerClass, footer,
+    className, style, headerClass, header, onSubmit, contentClass, children, footerClass, footer
   } = props;
 
   return (

@@ -60,7 +60,7 @@
   .nav-links a {
     color: #779A29;
     text-decoration: none;
-    font-weight: 550;
+    /* font-weight: 550; */
   }
 
   .nav-links button {
@@ -71,7 +71,9 @@
 
   .nav-links button:hover,
   .nav-links button:active {
-    background: #f8df00;
+    background: #DDF3AD;
+    border: 1px solid white;
     color: #292929;
+    text-decoration: underline;
   }
 }
