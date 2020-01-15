@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import Input from '../../../shared/components/FormElements/input/Input';
@@ -14,6 +14,7 @@ import './PlaceForm.css';
 
 const AddNewPlace = () => {
   const auth = useContext(AuthenticationContext);
+  const [hasMapError, setHasMapError] = useState(false);
   const {
     isLoading, error, sendRequest, clearError
   } = useHttpClient();
@@ -44,6 +45,10 @@ const AddNewPlace = () => {
   const submitAddNewPlace = async (event) => {
     event.preventDefault();
 
+    const handleFetchError = () => {
+      setHasMapError(true);
+    };
+
     try {
       const formData = new FormData();
       formData.append('title', formState.inputs.title.value);
@@ -57,7 +62,9 @@ const AddNewPlace = () => {
         { Authorization: `Bearer ${auth.token}` }
       );
       history.push('/');
-    } catch (error) {}
+    } catch (error) {
+      handleFetchError();
+    }
   };
 
   return (
@@ -90,6 +97,11 @@ const AddNewPlace = () => {
           errorMessage="Please enter a valid address"
           onInput={inputChange}
         />
+        {hasMapError === true && (
+          <div className="form-control--invalid">
+            <p>Invalid address entered. Please correct and try again</p>
+          </div>
+        )}
         <ImageUpload id="imageUrl" onInput={inputChange} />
         <hr />
         <Button type="submit" disabled={!formState.isValid}>

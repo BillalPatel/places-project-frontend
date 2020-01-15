@@ -15,6 +15,8 @@ import './Authentication.css';
 const Authentication = () => {
   const auth = useContext(AuthenticationContext);
   const [isLoginForm, setIsLoginForm] = useState(true);
+  const [hasLoginError, setHasLoginError] = useState(false);
+  const [hasSignupError, setHasSignupError] = useState(false);
   const {
     isLoading, error, sendRequest, clearError
   } = useHttpClient();
@@ -65,6 +67,15 @@ const Authentication = () => {
   const submitAuthentication = async (event) => {
     event.preventDefault();
 
+    const handleFetchResponse = (formType) => {
+      if (formType === 'login') {
+        setHasLoginError(true);
+      } else {
+        setHasSignupError(true);
+      }
+    };
+
+
     if (isLoginForm) {
       try {
         const responseData = await sendRequest(`${process.env.REACT_APP_BACKEND_URL}users/login`,
@@ -75,7 +86,10 @@ const Authentication = () => {
           }),
           { 'Content-Type': 'application/json' });
         auth.login(responseData.user, responseData.token);
-      } catch (error) {}
+      } catch (error) {
+        let formType = 'login';
+        handleFetchResponse(formType);
+      }
     } else {
       try {
         const formData = new FormData();
@@ -91,7 +105,10 @@ const Authentication = () => {
         );
 
         auth.login(responseData.user, responseData.token);
-      } catch (error) {}
+      } catch (error) {
+        let formType = 'signup';
+        handleFetchResponse(formType);
+      }
     }
   };
 
@@ -141,6 +158,16 @@ const Authentication = () => {
             errorMessage="Please enter a valid password, at least 6 characters."
             onInput={inputChange}
           />
+          {hasLoginError === true && (
+            <div className="form-control--invalid">
+              <p>Invalid e-mail address and/or password</p>
+            </div>
+          )}
+          {hasSignupError === true && (
+            <div className="form-control--invalid">
+              <p>E-mail address already registered, please login instead</p>
+            </div>
+          )}
           <Button type="submit" disabled={!formState.isValid}>
             {isLoginForm ? 'LOGIN' : 'SIGNUP'}
           </Button>
