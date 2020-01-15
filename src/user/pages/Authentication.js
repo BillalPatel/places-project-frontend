@@ -120,7 +120,6 @@ const Authentication = () => {
             <ImageUpload
               id="imageUrl"
               onInput={inputChange}
-              errorText="Please provide an image"
               center
             />
             )}
@@ -146,6 +145,7 @@ const Authentication = () => {
             {isLoginForm ? 'LOGIN' : 'SIGNUP'}
           </Button>
         </form>
+        <hr />
         <Button inverse onClick={switchForm}>
           {isLoginForm ? 'Signup Instead' : 'Login Instead'}
         </Button>
