@@ -9,4 +9,4 @@ npm run dev
 
 ![](README_GIF.gif)
 
-NodeJS backend repository can be found [here](https://github.com/BillalPatel/places-sharer-api)
+NodeJS backend repository can be found [here](https://github.com/BillalPatel/places-sharer-api).
