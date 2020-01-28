@@ -1,6 +1,6 @@
 ## Places Sharer
 
-### A simple MERN app that allows users to register an account and save their favourite visited places with an image and address.
+A simple MERN app that allows users to register an account and save their favourite visited places with an image and address.
 
 ```bash
 npm i
