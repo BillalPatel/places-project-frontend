@@ -1,4 +1,4 @@
 # places-project-react
 
-![](README_GIF.gif)
+!![](README_GIF.gif)
 
