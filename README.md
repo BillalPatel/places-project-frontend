@@ -7,5 +7,4 @@ npm i
 npm run dev
 ```
 
-!![](README_GIF.gif)
-
+![](README_GIF.gif)
