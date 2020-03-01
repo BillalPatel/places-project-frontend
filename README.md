@@ -4,7 +4,7 @@ A simple MERN app that allows users to register an account and save their favour
 
 ## Installation
 
-Use npm to install and run
+Use NPM to install and run
 
 ```bash
 npm i
